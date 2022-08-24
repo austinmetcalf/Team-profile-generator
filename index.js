@@ -1,14 +1,71 @@
-import { Manager } from "./lib/Manager"
-import { Engineer } from "./lib/Engineer"
-import { Intern } from "./lib/Intern"
+import inquirer from 'inquirer';
+import { Manager } from "./lib/Manager.js"
+import { Engineer } from "./lib/Engineer.js"
+import { Intern } from "./lib/Intern.js"
+const employees = []
 
-export function runProgram() {
-const newManager = new Manager('Billy Jo', 123, "bill@gmail.com", 123)
+async function getManager(){
+    const questions = [
+        {
+          type: 'input',
+          name: 'name',
+          message: "What's the team managers name?",
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What's your employee id?",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What's your email address?",
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: "What's your office number?",
+        },
+      ];
+      
+    const answers = await inquirer.prompt(questions)
+    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+    employees.push(manager)
+    console.log(employees)
+}
 
-console.log(newManager.getEmail())
-console.log(newManager.getId())
-console.log(newManager.getRole())
+async function getEmployeeType(){
+    const questions = [
+        {
+          type: 'number',
+          name: 'name',
+          message: "What's the team managers name?",
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What's your employee id?",
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What's your email address?",
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: "What's your office number?",
+        },
+      ];
+      
+    const answers = await inquirer.prompt(questions)
+    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+    employees.push(manager)
+    console.log(employees)
+}
+
+async function runProgram() {
+    await getManager()
 }
 
 runProgram()
-
